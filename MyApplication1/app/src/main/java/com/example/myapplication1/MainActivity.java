@@ -3,10 +3,16 @@ package com.example.myapplication1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -87,8 +93,67 @@ public class MainActivity extends AppCompatActivity {
         t_denhao.setOnClickListener(buttonlistener);
 
 
+        Button but_id = findViewById(R.id.but_exit);
+        Button but_tz = findViewById(R.id.but_tz);
+
+        but_tz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("https://github.com/1061572235/dwj_android");    //设置跳转的网站
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
+
+        but_id.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View arg0) {
+
+                exit();
+
+            }
+
+        });
+
+        MainActivity.activityList.add(this);
+    }
+    public void exit(){
+
+        for(Activity act:activityList){
+
+            act.finish();
+
+        }
+
+        System.exit(0);
 
     }
 
 
+
+
+
+
+
+
+
+
+    public static List<Activity> activityList = new LinkedList();
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
